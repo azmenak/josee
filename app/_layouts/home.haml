@@ -9,10 +9,25 @@
     %link{rel: "stylesheet", href: "/assets/css/screen.css"}
     / endbuild
 
+    / build:js({app,.tmp,_bower_comonents}) /assets/header.js
+    -# %script{src: "/modernizr/modernizr.js"}
+    / endbuild
+
   %body
     #main
-      {{ content }}
+      %header
+        .row
+          .medium-8.columns.medium-offset-2
+            %img.josee{src: "/assets/images/josee.jpg"}
 
-    / build:js({app,.tmp}) /assets/javascripts.js
+      .row
+        .medium-8.columns.medium-offset-2
+          {{ content }}
+
+    / build:js({app,.tmp,_bower_components}) /assets/javascripts.js
+
+    -# %script{src: "/jquery/jquery.js"}
+    -# %script{src: "/foundation/js/vendor/fastclick.js"}
+
     %script{src: "/assetsjavascript/main.js"}
     / endbuild

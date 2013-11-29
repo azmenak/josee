@@ -25,9 +25,12 @@ module.exports = (grunt) ->
       dist: "dist"
 
     watch:
-      jade: 
-        files: ['<%= yeoman.app %>/_layouts/jade/{,*/}*.jade', '<%= yeoman.app %>/_jade/{,*/}*.jade']
-        tasks: ['jade']
+      haml:
+        files: [
+          "<%= yeoman.app %>/**/*.haml"
+          "<%= yeoman.app %>/*.haml"
+        ]
+        tasks: ['clean:server', 'jekyll:server']
 
       compass:
         files: ["<%= yeoman.app %>/_scss/**/*.{scss,sass}"]
@@ -53,7 +56,7 @@ module.exports = (grunt) ->
 
       jekyll:
         files: [
-          "<%= yeoman.app %>/**/*.{html,yml,md,mkd,markdown}"
+          "<%= yeoman.app %>/**/*.{html,yml,md,mkd,markdown, haml}"
           "_config.yml"
           "!<%= yeoman.app %>/_bower_components"
         ]
@@ -69,32 +72,7 @@ module.exports = (grunt) ->
           "{.tmp,<%= yeoman.app %>}/<%= js %>/**/*.js"
           "<%= yeoman.app %>/assets/images/**/*.{gif,jpg,jpeg,png,svg,webp}"
           "<%= yeoman.app %>/**/*.haml"
-        ]
-
-    jade:
-      dist:
-        options:
-          pretty: true
-          # amd: true # use when including from JS
-          data:
-            debug: true
-            timestamp: '<%= new Date().getTime() %>'
-
-        files: [
-          {
-            expand: true
-            dest: '<%= yeoman.app %>/_layouts'
-            src: '<%= yeoman.app %>/_layouts/jade/{,*/}*.jade'
-            flatten: true
-            ext: '.html'
-          }
-          {
-            expand: true
-            dest: '<%= yeoman.app %>'
-            src: '<%= yeoman.app %>/_jade/{,*/}*.jade'
-            flatten: true
-            ext: '.html'
-          }
+          "<%= yeoman.app %>/*.haml"
         ]
 
     connect:
@@ -415,7 +393,6 @@ module.exports = (grunt) ->
 
   
   grunt.loadNpmTasks 'grunt-build-control'
-  grunt.loadNpmTasks 'grunt-contrib-jade'
   
   # Define Tasks
   grunt.registerTask "serve", (target) ->
@@ -426,7 +403,6 @@ module.exports = (grunt) ->
       ])
     grunt.task.run [
       "clean:server"
-      "jade"
       "concurrent:server"
       "autoprefixer:server"
       "connect:livereload"
@@ -440,10 +416,10 @@ module.exports = (grunt) ->
   
   # No real tests yet. Add your own.
   grunt.registerTask "test", []
-  
   #   'clean:server',
   #   'concurrent:test',
   #   'connect:test'
+  
   grunt.registerTask "check", [
     "clean:server"
     "jekyll:check"
@@ -459,7 +435,6 @@ module.exports = (grunt) ->
     # Jekyll cleans files from the target directory, so must run first
     "jekyll:dist"
     "concurrent:dist"
-    "jade"
     "useminPrepare"
     "concat"
     "autoprefixer:dist"
