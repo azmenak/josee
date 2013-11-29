@@ -5,8 +5,14 @@
     %title {{page.title}}
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
 
+    / build:css({app,.tmp}) /assets/css.screen.css
     %link{rel: "stylesheet", href: "/assets/css/screen.css"}
+    / endbuild
 
   %body
     #main
       {{ content }}
+
+    / build:js({app,.tmp}) /assets/javascripts.js
+    %script{src: "/assetsjavascript/main.js"}
+    / endbuild

@@ -402,6 +402,17 @@ module.exports = (grunt) ->
         "coffee:dist"
         "copy:dist"
       ]
+
+    buildcontrol:
+      options:
+        dir: 'dist'
+        commit: true
+        push: true
+      pages:
+        options:
+          remote: 'git@github.com:azmenak/josee.git'
+          branch: 'gh-pages'
+
   
   grunt.loadNpmTasks 'grunt-build-control'
   grunt.loadNpmTasks 'grunt-contrib-jade'
@@ -461,9 +472,11 @@ module.exports = (grunt) ->
     "htmlmin"
   ]
 
-  grunt.registerTask "buildcontrol", [
-    
+  grunt.registerTask "deploy", [
+    "build"
+    "buildcontrol:pages"
   ]
+
   grunt.registerTask "default", [
     "check"
     "test"
