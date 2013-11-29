@@ -1,0 +1,1 @@
+# Static Stie Geneator for jGoulet Consultant
