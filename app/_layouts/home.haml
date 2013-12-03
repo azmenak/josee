@@ -15,14 +15,17 @@
 
   %body
     #main
-      %header
-        .row
-          .medium-8.columns.medium-offset-2
-            %img.josee{src: "/assets/images/josee.jpg"}
-
       .row
-        .medium-8.columns.medium-offset-2
-          {{ content }}
+        .medium-4.columns
+          %header
+
+            %img.josee{src: "/assets/images/josee.jpg"}
+            %h1.tagline jGoulet Consultant
+
+        .medium-8.columns
+          #content
+            {{ content }}
+          
 
     / build:js({app,.tmp,_bower_components}) /assets/javascripts.js
 

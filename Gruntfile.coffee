@@ -22,7 +22,7 @@ module.exports = (grunt) ->
     # Configurable paths
     yeoman:
       app: "app"
-      dist: "dist"
+      dist: "dist"  
 
     watch:
       haml:
@@ -30,7 +30,7 @@ module.exports = (grunt) ->
           "<%= yeoman.app %>/**/*.haml"
           "<%= yeoman.app %>/*.haml"
         ]
-        tasks: ['clean:server', 'jekyll:server']
+        tasks: ['jekyll:server']
 
       compass:
         files: ["<%= yeoman.app %>/_scss/**/*.{scss,sass}"]
